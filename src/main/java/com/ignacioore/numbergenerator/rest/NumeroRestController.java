@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class NumeroRestController {
 	@Autowired
 	private NumeroService numeroService;
 	
-	@GetMapping (value= "", produces = "application/json")
+	@GetMapping (value= "/all", produces = "application/json")
 	public ResponseEntity<List<Numero>> getAllNumero(){
 		
 		List<Numero> numeros = numeroService.getAllNumero();
@@ -32,7 +33,21 @@ public class NumeroRestController {
 			
 	}
 	
-	@PostMapping(value = "/agregar", produces ="application/json")
+	@DeleteMapping (value= "/", produces = "application/json")
+	public ResponseEntity<Numero> getANumero(){
+		
+		List<Numero> numeros = numeroService.getAllNumero();
+		Numero num = numeros.get(0);
+		numeroService.delete(num);
+		
+		if(!numeros.isEmpty()) {
+			return new ResponseEntity<Numero>(num,HttpStatus.OK);
+		}
+		return new ResponseEntity<Numero>(HttpStatus.NOT_FOUND);
+			
+	}
+	
+	@PostMapping(value = "/add", produces ="application/json")
 	public ResponseEntity<Numero> addNumero(@RequestBody Numero numero) {
 		
 		try {
