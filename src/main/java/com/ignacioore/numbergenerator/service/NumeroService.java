@@ -15,11 +15,11 @@ public class NumeroService {
 	private NumeroRepository repo;
 	
 	public List<Numero> getAllNumero() {
-		return repo.findAll();
+		return (List<Numero>) repo.findAll();
 	}
 	
 	public List<Numero> getAllNumero(int inicio, int fin) {
-		List<Numero> allNumero = repo.findAll();
+		List<Numero> allNumero = (List<Numero>) repo.findAll();
 		List<Numero> range = new ArrayList<Numero>();
 		for (Numero num : allNumero) {
 			if (num.getNumero() >= inicio && num.getNumero() <= fin) {

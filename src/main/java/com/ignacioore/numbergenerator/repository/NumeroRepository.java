@@ -9,10 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NumeroRepository extends CrudRepository<Numero, UUID>{
-	public List<Numero> findAll();
-	
-	public void delete(Numero entity);
-	
-	public Numero persist(Numero entity);
 	
 }
