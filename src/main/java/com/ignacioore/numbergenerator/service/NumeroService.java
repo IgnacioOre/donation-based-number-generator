@@ -30,8 +30,14 @@ public class NumeroService {
 	}
 	
 	public Numero save(Numero entity) {
-		Numero num = repo.save(entity);
-		return num;
+		List<Numero> allNumero = (List<Numero>) repo.findAll();
+		for (Numero num : allNumero ) {
+			if (num.getNumero() == entity.getNumero()) {
+				return num;
+			}
+		}
+		Numero numero = repo.save(entity);
+		return numero;
 	}
 	
 	public void delete(Numero entity) {
