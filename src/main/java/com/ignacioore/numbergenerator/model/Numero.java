@@ -9,15 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 public class Numero {
-	public Numero(UUID id, int numero, String donante, Date fecha) {
-		super();
-		this.id = id;
-		this.numero = numero;
-		this.donante = donante;
-		this.fecha = fecha;
-	}
 
 	public Numero() {
 		super();
@@ -34,7 +29,8 @@ public class Numero {
 	@Column
 	private String donante;
 	
-	@Column
+	@Column(nullable = false, updatable = false)
+	@CreationTimestamp
 	private Date fecha;
 	
 	public UUID getId() {
